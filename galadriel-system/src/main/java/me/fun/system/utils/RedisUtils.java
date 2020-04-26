@@ -164,8 +164,7 @@ public class RedisUtils {
      * @return
      */
     public List<Object> multiGet(List<String> keys) {
-        Object obj = redisTemplate.opsForValue().multiGet(Collections.singleton(keys));
-        return null;
+        return redisTemplate.opsForValue().multiGet(Collections.singleton(keys));
     }
 
     /**
