@@ -59,7 +59,7 @@ public class LoginCodeController{
             put("img", captcha.toBase64());
             put("uuid", uuid);
         }};
-        return ResponseEntity.ok(imgResult);
+        return ResponseWrapper.ok(imgResult);
     }
 
 

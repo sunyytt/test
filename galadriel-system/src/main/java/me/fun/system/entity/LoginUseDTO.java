@@ -28,5 +28,4 @@ public class LoginUseDTO {
     @ApiModelProperty(value = "uuid")
     @NotBlank
     private String uuid = "";
-
 }

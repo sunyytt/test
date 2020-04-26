@@ -62,7 +62,8 @@ jwt:
   code-key: code-key
   #具体路径 上线禁止全路径
   whiteList:
-    - /auth/code
+    - /auth/**
+    - /*/**
     - /test/**
 
 #是否允许生成代码，生产环境设置为false
