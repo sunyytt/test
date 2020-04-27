@@ -15,6 +15,11 @@ public class User {
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
     private String id;
+    /**
+     * 全局唯一
+     */
+    @Column(name="username", unique = true, nullable = false, length = 64)
+    private String userName;
     private Integer status;
     private Integer source;
 

@@ -14,8 +14,8 @@ public class UserOnline {
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
     private String id;
-    @Column(length = 64)
-    private String username;
+    @Column(name="username", length = 64)
+    private String userName;
     @Column(length = 64)
     private String ip;
     @Column(length = 64)
@@ -23,5 +23,7 @@ public class UserOnline {
     private String address;
     @Column(name = "login_time")
     private Timestamp loginTime;
+    /**类型 true 登录，false 登出*/
+    private boolean type;
 
 }

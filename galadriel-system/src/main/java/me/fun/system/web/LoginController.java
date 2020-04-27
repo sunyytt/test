@@ -93,9 +93,11 @@ public class LoginController {
 
     @ApiOperation("退出登录")
 //    @AnonymousAccess
-    @DeleteMapping(value = "/auth/logout")
+    @PostMapping(value = "/auth/logout")
     public Object logout(HttpServletRequest request){
 //        onlineUserService.logout(tokenProvider.getToken(request));
+        System.out.println("ssssssssss");
+        onlineUserService.logOut("admin",request);
         return ResponseWrapper.ok();
     }
 

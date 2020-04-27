@@ -22,4 +22,15 @@ public interface OnlineUserService {
      * @time 2020/4/27 15:49
      */
     void save(LoginUseDTO authUser, HttpServletRequest request);
+
+   /**
+    * 记录登出
+    * @param userName
+    * @param request
+    * @return void
+    * @throws
+    * @author sunyy
+    * @time 2020/4/27 17:42
+    */
+    void logOut(String userName, HttpServletRequest request);
 }
