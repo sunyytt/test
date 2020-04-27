@@ -13,11 +13,10 @@ import me.fun.system.utils.ResponseWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class LoginController {
         }
         LoginUseVO loginUse = new LoginUseVO();
         loginUse.setToken("admin-token");
-        return ResponseWrapper.ok("admin-token");
+        return ResponseWrapper.ok(loginUse);
     }
 
     @ApiOperation("登录获取用户信息")
@@ -73,12 +72,22 @@ public class LoginController {
     public Object getUserInfo(String  token){
         log.info("token={}",token);
         Map<String,Object> imgResult = new HashMap<String,Object>(2){{
-            put("roles", new ArrayList<String>().add("admin"));
+            List<String> list = new ArrayList<>();
+            list.add("admin");
+            put("roles", list);
             put("introduction", "I am a super administrator");
             put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
             put("name", "Super Admin");
         }};
         return ResponseWrapper.ok(imgResult);
+    }
+
+    @ApiOperation("退出登录")
+//    @AnonymousAccess
+    @DeleteMapping(value = "/auth/logout")
+    public Object logout(HttpServletRequest request){
+//        onlineUserService.logout(tokenProvider.getToken(request));
+        return ResponseWrapper.ok();
     }
 
 }
