@@ -8,6 +8,7 @@ import me.fun.system.entity.LoginUseDTO;
 import me.fun.system.entity.LoginUseVO;
 import me.fun.system.exception.AuthBusinessException;
 import me.fun.system.exception.AuthErrorCodeEnum;
+import me.fun.system.service.OnlineUserService;
 import me.fun.system.utils.RedisUtils;
 import me.fun.system.utils.ResponseWrapper;
 import org.apache.commons.lang3.StringUtils;
@@ -46,6 +47,8 @@ public class LoginController {
 
     @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private OnlineUserService onlineUserService;
 
     @ApiOperation("登录授权")
 //    @AnonymousAccess
@@ -53,15 +56,21 @@ public class LoginController {
     public Object login(@Validated @RequestBody LoginUseDTO authUser, HttpServletRequest request){
 
         log.info("登录入参={}",authUser);
+        // 查询 code
         String code = (String) redisUtils.get(authUser.getUuid());
         // 清除验证码
         redisUtils.del(authUser.getUuid());
+
         if (StringUtils.isBlank(code)) {
             return ResponseWrapper.error(AuthErrorCodeEnum.AE500000.message());
         }
         if (StringUtils.isBlank(authUser.getCode()) || !authUser.getCode().equalsIgnoreCase(code)) {
             return ResponseWrapper.error(AuthErrorCodeEnum.AE500001.message());
         }
+        // 校验用户名密码
+        // 生成token
+        // 保存在线信息
+        onlineUserService.save(authUser,request);
         LoginUseVO loginUse = new LoginUseVO();
         loginUse.setToken("admin-token");
         return ResponseWrapper.ok(loginUse);

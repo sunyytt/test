@@ -1,5 +1,6 @@
 package me.fun.system.web;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
