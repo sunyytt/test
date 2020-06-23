@@ -30,7 +30,7 @@ public class OnlineUserServiceImpl implements OnlineUserService {
     @Override
     public void save(LoginUseDTO authUser, HttpServletRequest request){
         UserOnline userOnline = new UserOnline();
-        userOnline.setUserName(authUser.getUsername());
+        userOnline.setUserName(authUser.getUserName());
         String ip = StringUtils.getIp(request);
         userOnline.setIp(ip);
         userOnline.setBrowser(StringUtils.getBrowser(request));

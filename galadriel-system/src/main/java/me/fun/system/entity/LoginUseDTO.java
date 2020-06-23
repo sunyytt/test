@@ -18,7 +18,7 @@ public class LoginUseDTO {
 
     @ApiModelProperty(value = "账号/手机号")
     @NotBlank
-    private String username;
+    private String userName;
     @ApiModelProperty(value = "密码")
     @NotBlank
     private String password;
@@ -27,5 +27,5 @@ public class LoginUseDTO {
     private String code;
     @ApiModelProperty(value = "uuid")
     @NotBlank
-    private String uuid = "";
+    private String uuid;
 }
