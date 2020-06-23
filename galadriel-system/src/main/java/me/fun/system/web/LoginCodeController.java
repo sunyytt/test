@@ -1,11 +1,13 @@
 package me.fun.system.web;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import me.fun.system.config.SecurityProperties;
+import me.fun.system.entity.LoginCodeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -54,12 +56,10 @@ public class LoginCodeController{
         String uuid = properties.getCodeKey() + IdUtil.simpleUUID();
         // 保存
         redisUtils.set(uuid, result, expiration, TimeUnit.MINUTES);
-        // 验证码信息
-        Map<String,Object> imgResult = new HashMap<String,Object>(2){{
-            put("img", captcha.toBase64());
-            put("uuid", uuid);
-        }};
-        return ResponseEntity.ok(imgResult);
+        LoginCodeVO loginCode = new LoginCodeVO();
+        loginCode.setImg(captcha.toBase64());
+        loginCode.setUuid(uuid);
+        return ResponseWrapper.ok(loginCode);
     }
 
 

@@ -7,7 +7,7 @@
     <groupId>me.fun</groupId>
     <artifactId>galadriel-admin</artifactId>
     <packaging>pom</packaging>
-    //根据springboot 版本号走，后一位是项目版本号
+<!--    //根据springboot 版本号走，后一位是项目版本号-->
     <version>2.1.0</version>
     <modules>
         <module>galadriel-system</module>
